@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=.75">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>SeetiTel Frontend</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="css/simple-sidebar.css" rel="stylesheet">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style type="text/css">
+  .whistle:nth-of-type(odd) {
+      background: #1b1b1b;
+  }
+</style>
+</head>
+
+<body>
+
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper" style="overflow-x: hidden;">
+      <ul class="sidebar-nav" id="whistle-list" style="padding-right: 10px;">
+        <li class="sidebar-brand">
+          <a href="#menu-toggle" class="menu-toggle" style="display: inline;">Recent Whistles</a>  <a href="#" onclick="$('#createModal').modal('show');" id="createWhistle" class="pull-right" style="display: inline; margin-right: 20px;"><i class="glyphicon glyphicon-pencil"></i></a>
+        </li>
+      </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <a href="#menu-toggle" class="btn btn-default menu-toggle">Toggle Menu</a>
+            <div id="dataview">
+              <h3>Select a leak on the left to begin.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Create Whistle</h4>
+        </div>
+        <div class="modal-body">
+
+
+          <div role="tabpanel">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#text" aria-controls="text" role="tab" data-toggle="tab">Text</a></li>
+        <li role="presentation"><a href="#image" aria-controls="image" role="tab" data-toggle="tab">Image</a></li>
+        <li role="presentation"><a href="#voice" aria-controls="voice" role="tab" data-toggle="tab">Voice</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="text">
+          <br /><br />
+          <textarea style="-webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; width: 100%" id="textWhistle" placeholder="enter a whistle here..."></textarea><br />
+          <button id="submitText" class="pull-right btn btn-success">Submit Whistle</button>
+          <div class="clearfix"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="image">
+          Select an image to upload: <br /><br />
+          <form id="imgForm" enctype="multipart/form-data">
+            <input type="file" name="data" id="whistleUpload">
+            <input type="hidden" name="type" value="2">
+          </form>
+          <br /><br />
+          <button id="submitImg" class="pull-right btn btn-success">Submit Whistle</button>
+          <div class="clearfix"></div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="voice"><h2>Please call a SeetiTel line on an anonymous mobile device.</h2></div>
+        </div>
+
+    </div>
+
+
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- jQuery -->
+  <script src="js/jquery.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
+
+  <!-- Menu Toggle Script -->
+  <script>
+    $(".menu-toggle").click(function(e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
+
+  <script src="js/whistle.js"></script>
+
+</body>
+
+</html>
