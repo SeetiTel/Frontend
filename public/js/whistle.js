@@ -49,7 +49,7 @@ function displayWhistle(id) {
     switch (data.type) {
       case 0:
         type = "Text";
-        embed = data.content;
+        embed = '<h2>' + data.content + '</h2>';
         break;
       case 1:
         type = "Audio";
@@ -57,7 +57,7 @@ function displayWhistle(id) {
         break;
       case 2:
         type = "Image";
-        embed = '<img src="' + apisource + data.content + '">';
+        embed = '<img src="' + apisource + data.content + '" style="max-width: 700px;">';
         break;
     }
 
