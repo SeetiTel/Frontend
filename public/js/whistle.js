@@ -50,17 +50,17 @@ function displayWhistle(id) {
         break;
       case 1:
         type = "Audio";
-        embed = '<audio controls><source src="' + apisource + "/" + data.content + '"" preload="auto" type="audio/mpeg">Your browser does not support the audio element.<audio>';
+        embed = '<audio controls><source src="' + apisource  + data.content + '" preload="auto" type="audio/mpeg">Your browser does not support the audio element.</audio>';
         break;
       case 2:
         type = "Image";
-        embed = '<img src="' + apisource + "/" + data.content + '">';
+        embed = '<img src="' + apisource + data.content + '">';
         break;
     }
 
     created = new Date(data.created);
-    $("#dataview").append('<strong>ID: ' + data.id + '<br /><strong>Type:</strong> ' + type + '</br><strong>Created: </strong>' + created.toISOString() + '<br />');
-    $("#dataview").append('Content: <br />' + embed);
+    $("#dataview").append('<div class="col-md-6"><h3><strong>Type:</strong> ' + type + '</br></h3></div><div class="col-md-6"><h3><strong>Created: </strong>' + created.toISOString() + '<br /></h3></div>');
+    $("#dataview").append('<hr /><div class="col-lg-4 col-lg-offset-4">' + embed + '</div>');
     if (isMobile) {
       //only hide the drawer if we need to for space issues.
       $("#wrapper").toggleClass("toggled");
