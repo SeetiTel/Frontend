@@ -17,19 +17,22 @@ function populateList(offset) {
     $.each(data, function(i, item) {
       switch (data[i].type) {
         case 0:
-          type = "Text";
+          type = "<span>Text</span>";
+          glyphicon = '<h1 class="pull-left" style="display: inline; margin-left: -30px;"><i class="glyphicon glyphicon-pencil"></i></h1>';
           break;
         case 1:
-          type = "Audio";
+          glyphicon = '<h1 class="pull-left" style="display: inline; margin-left: -30px;"><i class="glyphicon glyphicon-volume-up"></i></h1>';
+          type = "<span>Audio</span>";
           break;
         case 2:
-          type = "Image";
+         glyphicon = '<h1 class="pull-left" style="display: inline; margin-left: -30px;"><i class="glyphicon glyphicon-picture"></i></h1>';
+        type = "<span>Image</span>";
           break;
       }
 
       created = new Date(data[i].created);
 
-      $("#whistle-list").append('<li class="whistle"><a href="#" onclick="displayWhistle(' + data[i].id + ')">' + type + '<div class="pull-right" style="padding-right: 10px;">' + created.toISOString() + '</div><div class="teaser" style="text-indent: 0px !important; padding: 10px;">' + data[i].teaser + '</div></a></li>');
+      $("#whistle-list").append('<li class="whistle">' + glyphicon + '<a href="#" onclick="displayWhistle(' + data[i].id + ')">' + type + '<div class="pull-right" style="padding-right: 10px;">' + created.toISOString() + '</div><div class="teaser" style="text-indent: 0px !important; padding-left: 62px;">' + data[i].teaser + '</div></a></li>');
     });
   });
 }
@@ -85,7 +88,7 @@ $('#submitText').click(function() {
 });
 
 $('#submitImg').click(function() {
-
+  //load in all data (image and hidden form element for type)
   var formData = new FormData($('#imgForm')[0]);
 
     $.ajax({
@@ -105,6 +108,23 @@ $('#submitImg').click(function() {
     //show success and set a timweout to clear the notification
     $("#page-content-wrapper").prepend('<div id="savedWhistle" class="alert alert-success" role="alert">Whistle successfully submitted.</div>');
     setTimeout(function(){ $('#savedWhistle').remove();}, 5000);
+});
+
+$('#searchBox').change(function() {
+  if ($('#searchBox').val().length < 1) {
+    //search box is empty; reset
+    populateList(0);
+  } else{  
+    $(".whistle").remove();
+    $.getJSON(apisource + "/api/v1/whistles/search/" + $('#searchBox').val(), function(data) {
+      $.each(data, function(i, item) {
+        type = "Text";
+        created = new Date(data[i].created);
+        
+        $("#whistle-list").append('<li class="whistle"><a href="#" onclick="displayWhistle(' + data[i].id + ')">' + type + '<div class="pull-right" style="padding-right: 10px;">' + created.toISOString() + '</div><div class="teaser" style="text-indent: 0px !important; padding: 10px;">' + data[i].teaser + '</div></a></li>');
+      });
+    });
+  }
 });
 
 //populate the drawer
